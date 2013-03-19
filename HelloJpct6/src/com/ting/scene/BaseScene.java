@@ -1,7 +1,9 @@
 package com.ting.scene;
 
 import com.threed.jpct.Loader;
+import com.threed.jpct.Matrix;
 import com.threed.jpct.Object3D;
+import com.threed.jpct.SimpleVector;
 import com.threed.jpct.Texture;
 import com.threed.jpct.TextureManager;
 import com.threed.jpct.World;
@@ -31,7 +33,12 @@ public class BaseScene {
 
 	public static Object3D loadOBJ(String name, float scale) {
 		Object3D[] arr = Loader.loadOBJ(name + ".obj", name + ".mtl", scale);
-		return arr[0];
+		Object3D temp = arr[0]; 
+        temp.setCenter(SimpleVector.ORIGIN);
+        temp.rotateX((float)(Math.PI));
+        temp.rotateMesh();
+        temp.setRotationMatrix(new Matrix());
+		return temp;
 	}
 
 }
