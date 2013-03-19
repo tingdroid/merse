@@ -1,9 +1,13 @@
 package com.ting.scene;
 
+import com.threed.jpct.Loader;
+import com.threed.jpct.Object3D;
 import com.threed.jpct.Texture;
 import com.threed.jpct.TextureManager;
+import com.threed.jpct.World;
 
 public class BaseScene {
+	public World world = new World();
 
 	public static String addTexture(String name, int width, int height) {
 		String shortName = name.contains(".") ? 
@@ -23,6 +27,11 @@ public class BaseScene {
 
 	public static String addTexture(String name) {
 		return addTexture(name, 0, 0);
+	}
+
+	public static Object3D loadOBJ(String name, float scale) {
+		Object3D[] arr = Loader.loadOBJ(name + ".obj", name + ".mtl", scale);
+		return arr[0];
 	}
 
 }
