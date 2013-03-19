@@ -20,5 +20,10 @@
 			<type>2</type>
 			<locationURI>WORKSPACE_LOC/jpct/lib</locationURI>
 		</link>
+		<link>
+			<name>scene</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/misc/TingJpct5/scene</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

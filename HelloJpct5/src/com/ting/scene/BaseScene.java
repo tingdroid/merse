@@ -3,7 +3,7 @@ package com.ting.scene;
 import com.threed.jpct.Texture;
 import com.threed.jpct.TextureManager;
 
-public class SceneHelper {
+public class BaseScene {
 
 	public static String addTexture(String name, int width, int height) {
 		String shortName = name.contains(".") ? 
