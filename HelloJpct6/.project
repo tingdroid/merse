@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>assets</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/misc/TingJpct6/assets</locationURI>
+		</link>
+		<link>
 			<name>jpct_lib</name>
 			<type>2</type>
 			<locationURI>WORKSPACE_LOC/jpct/lib</locationURI>
