@@ -11,8 +11,10 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=HelloJpct6/src"/>
+        <file path="/HelloJpct6/assets/plane.mtl"/>
         <javaElement handleIdentifier="=HelloJpct6/scene"/>
-        <folder path="/HelloJpct6/assets"/>
+        <javaElement handleIdentifier="=HelloJpct6/src"/>
+        <file path="/HelloJpct6/assets/box.jpg"/>
+        <file path="/HelloJpct6/assets/plane.obj"/>
     </selectedElements>
 </jardesc>
