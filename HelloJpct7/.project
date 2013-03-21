@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>HelloJpct7</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>assets</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/misc/TingJpct7/assets</locationURI>
+		</link>
+		<link>
+			<name>jpct_lib</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/jpct/lib</locationURI>
+		</link>
+		<link>
+			<name>scene</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/misc/TingJpct7/scene</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
