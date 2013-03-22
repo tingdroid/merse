@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<!-- Configuration of the Ant build system to generate a Jar file -->
+<project name="HelloJpct7" default="CreateJar">
+	<target name="CreateJar" description="Create Jar file">
+		<jar jarfile="HelloJpct7.jar">
+			<fileset dir="../bin" includes="**/*.class" />
+			<zipfileset dir="../assets" includes="**/*" prefix="assets"/>
+			<manifest>
+				<attribute name="Main-Class" value="com.ting.app.MainOGL" />
+			</manifest>
+		</jar>
+	</target>
+</project>
