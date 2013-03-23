@@ -18,5 +18,5 @@
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.ting.app.MainOGL"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HelloJpct7"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=../../jpct/lib/lwjgl-2.8.0/native/macosx -Djava.library.path=../../jpct/lib/lwjgl-2.8.0/native/windows"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=../../jpct/lib/lwjgl-2.8.0/native/macosx:../../jpct/lib/lwjgl-2.8.0/native/windows"/>
 </launchConfiguration>

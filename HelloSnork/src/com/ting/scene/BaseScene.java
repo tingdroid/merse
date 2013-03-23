@@ -12,7 +12,11 @@ import com.threed.jpct.TextureManager;
 import com.threed.jpct.World;
 
 public class BaseScene {
-	static URL baseUrl = BaseScene.class.getResource("/assets/");
+	static URL baseUrl;
+	static {
+		baseUrl = BaseScene.class.getResource("/assets/");
+		if (baseUrl == null) baseUrl = BaseScene.class.getResource("/");
+	}
 	
 	public World world = new World();
 

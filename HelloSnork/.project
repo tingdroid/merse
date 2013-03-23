@@ -16,7 +16,7 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>assets</name>
+			<name>assets_ref</name>
 			<type>2</type>
 			<locationURI>WORKSPACE_LOC/misc/Snork/assets</locationURI>
 		</link>

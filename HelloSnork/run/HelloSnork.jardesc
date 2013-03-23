@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<?xml version="1.0" encoding="MacRoman" standalone="no"?>
 <jardesc>
     <jar path="HelloSnork/run/HelloSnork.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/HelloSnork/run/HelloSnork.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
@@ -11,8 +11,8 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=HelloSnork/src"/>
         <javaElement handleIdentifier="=HelloSnork/scene"/>
         <folder path="/HelloSnork/assets"/>
+        <javaElement handleIdentifier="=HelloSnork/src"/>
     </selectedElements>
 </jardesc>
