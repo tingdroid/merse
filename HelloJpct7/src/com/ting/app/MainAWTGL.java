@@ -10,6 +10,7 @@ import com.ting.scene.Scene;
 
 /**
  * A simple HelloWorld using the AWTGL-Renderer and rendering into a frame.
+ * 
  * @author EgonOlsen
  * 
  */
@@ -24,8 +25,7 @@ public class MainAWTGL {
 	}
 
 	public MainAWTGL() throws Exception {
-		
-		frame=new JFrame("Hello world");
+		frame = new JFrame("Hello world");
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -35,12 +35,18 @@ public class MainAWTGL {
 
 	private void loop() throws Exception {
 		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
-		Canvas canvas=buffer.enableGLCanvasRenderer();
+		Canvas canvas = buffer.enableGLCanvasRenderer();
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		frame.add(canvas);
 
+		AWTPointer pointer = new AWTPointer(canvas);
+
 		while (frame.isShowing()) {
-			scene.loop();
+			if (pointer.isDown()) {
+				scene.move(pointer.getDX(), pointer.getDY());
+			} else {
+				scene.loop();
+			}
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);

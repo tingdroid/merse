@@ -8,8 +8,6 @@ import com.ting.scene.Scene;
 
 /**
  * A simple Scene using the OpenGL-renderer.
- * @author EgonOlsen
- *
  */
 public class MainOGL {
 
@@ -30,8 +28,20 @@ public class MainOGL {
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		buffer.enableRenderer(IRenderer.RENDERER_OPENGL);
 
+		// Display.setFullscreen(true);
+		Display.setTitle("Hello, world!");
+		
+		GLPointer pointer = new GLPointer(buffer);
+
 		while (!Display.isCloseRequested()) {
-			scene.loop();
+			if (pointer.isDown(0)) {
+				pointer.hide();
+				scene.move(pointer.getDX(), pointer.getDY());
+			} else {
+				pointer.show();
+				scene.loop();
+				// scene.move(-1, 0);  // animate
+			}
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);

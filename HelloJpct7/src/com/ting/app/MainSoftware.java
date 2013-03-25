@@ -2,14 +2,14 @@ package com.ting.app;
 
 import javax.swing.JFrame;
 
+import com.threed.jpct.Config;
 import com.threed.jpct.FrameBuffer;
 import com.threed.jpct.IRenderer;
 import com.ting.scene.Scene;
 
 /**
- * A simple HelloWorld using the Software-renderer and rendering into a frame
- * using active rendering.
- * @author EgonOlsen
+ * A simple Scene using the Software-renderer and rendering into a frame using
+ * active rendering.
  * 
  */
 public class MainSoftware {
@@ -23,19 +23,31 @@ public class MainSoftware {
 	}
 
 	public MainSoftware() throws Exception {
-		frame=new JFrame("Hello world");
+		frame = new JFrame("Hello world");
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		
+
 		scene = new Scene();
+
+		Config.glAvoidTextureCopies = true;
+		Config.glColorDepth = 24;
+		Config.glFullscreen = false;
+		Config.glShadowZBias = 0.8f;
+		Config.lightMul = 1;
 	}
 
 	private void loop() throws Exception {
 		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
 
+		AWTPointer pointer = new AWTPointer(frame);
+
 		while (frame.isShowing()) {
-			scene.loop();
+			if (pointer.isDown()) {
+				scene.move(pointer.getDX(), pointer.getDY());
+			} else {
+				scene.loop();
+			}
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);
@@ -49,5 +61,3 @@ public class MainSoftware {
 		System.exit(0);
 	}
 }
-
-	

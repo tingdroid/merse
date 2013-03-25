@@ -8,14 +8,11 @@ import com.ting.scene.Scene;
 
 /**
  * A simple Scene using the OpenGL-renderer.
- * @author EgonOlsen
- *
  */
 public class MainOGL {
 
 	private FrameBuffer buffer;
 	private Scene scene;
-	private GLPointer pointer;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) System.out.println(args[0]);
@@ -30,9 +27,11 @@ public class MainOGL {
 		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		buffer.enableRenderer(IRenderer.RENDERER_OPENGL);
+
+		// Display.setFullscreen(true);
+		Display.setTitle("Snork");
 		
-		pointer = new GLPointer(buffer);
-		pointer.hide();
+		GLPointer pointer = new GLPointer(buffer);
 
 		while (!Display.isCloseRequested()) {
 			if (pointer.isDown(0)) {
