@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import com.threed.jpct.FrameBuffer;
 import com.threed.jpct.IRenderer;
+import com.ting.scene.Pointer;
 import com.ting.scene.Scene;
 
 /**
@@ -16,31 +17,37 @@ import com.ting.scene.Scene;
 public class MainAWTGL {
 
 	private JFrame frame;
-	private FrameBuffer buffer;
-	private Scene scene;
 
 	public static void main(String[] args) throws Exception {
 		new MainAWTGL().loop();
 	}
 
 	public MainAWTGL() throws Exception {
-		
-		frame=new JFrame("Hello world");
+		frame = new JFrame("Hello world");
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		
-		scene = new Scene();
 	}
 
 	private void loop() throws Exception {
-		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
-		Canvas canvas=buffer.enableGLCanvasRenderer();
+		FrameBuffer buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
+		Canvas canvas = buffer.enableGLCanvasRenderer();
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		frame.add(canvas);
 
+		Pointer pointer = new Pointer();
+		AWTPointerAdapter pointerAdapter = new AWTPointerAdapter(pointer);
+		canvas.addMouseListener(pointerAdapter);
+		canvas.addMouseMotionListener(pointerAdapter);
+		
+		Scene scene = new Scene();
+
 		while (frame.isShowing()) {
-			scene.loop();
+			if (pointer.isDown()) {
+				scene.move(pointer.getDX(), pointer.getDY());
+			} else {
+				scene.loop();
+			}
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);

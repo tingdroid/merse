@@ -15,6 +15,7 @@ public class MainOGL {
 
 	private FrameBuffer buffer;
 	private Scene scene;
+	private GLPointer pointer;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) System.out.println(args[0]);
@@ -29,9 +30,19 @@ public class MainOGL {
 		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		buffer.enableRenderer(IRenderer.RENDERER_OPENGL);
+		
+		pointer = new GLPointer(buffer);
+		pointer.hide();
 
 		while (!Display.isCloseRequested()) {
-			scene.loop();
+			if (pointer.isDown(0)) {
+				pointer.hide();
+				scene.move(pointer.getDX(), pointer.getDY());
+			} else {
+				pointer.show();
+				scene.loop();
+				// scene.move(-1, 0);  // animate
+			}
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);
