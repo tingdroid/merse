@@ -52,6 +52,14 @@ public class GLFont {
 		    '\u00e7', '\u00c7', '\u011f', '\u011e', '\u0131', '\u0130',  
 		    '\u00f6', '\u00d6', '\u015f', '\u015e', '\u00fc', '\u00dc' });
 
+	public static float density = 1.25f;
+	public static int dp(int units) {
+		return (int)(units * density);
+	}		
+	public static int pd(int pixels) {
+		return (int)(pixels / density);
+	}
+		
 	/** 
 	 * same as getGLFont(font, ENGLISH) 
 	 * @see #getGLFont(Font, String) 
@@ -64,7 +72,7 @@ public class GLFont {
 	 * @author olegyk 
 	 */
 	public static GLFont getGLFont(String face, int style, int size) {
-		return getGLFont(new java.awt.Font(face, style, size));
+		return getGLFont(new java.awt.Font(face, style, dp(size)));
 	}
 
 	/** using platform-neutral Font parameters and default face 
@@ -206,7 +214,8 @@ public class GLFont {
 	 * @return    next x offset. Useful for chaining calls.
 	 */
 	public int blitString(FrameBuffer buffer, String s, int x, int y, int transparency, Color color) {
-		y -= baseline;
+		y = dp(y) - baseline;
+		x = dp(x);
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
@@ -218,7 +227,7 @@ public class GLFont {
 				x += size.width;
 			}
 		}
-		return x;
+		return pd(x);
 	}
 
 }

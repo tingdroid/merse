@@ -73,7 +73,7 @@ public class MainOGL {
 				scene.zoom(dz);
 			}
 			scene.hud.setText(0, "Position: %d %d", pointer.getX(), pointer.getY());
-//			scene.hud.setText(1, "Scale: %d", (int)dz);
+			scene.hud.setText(1, "Scale: %d", (int)dz);
 					
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
@@ -81,7 +81,7 @@ public class MainOGL {
 			buffer.update();
 
 			scene.hud.draw(buffer);
-			scene.hud.draw(buffer, "Snork", buffer.getWidth() - 50, 28);
+			scene.hud.draw(buffer, "Snork", -50, 28);
 			
 			buffer.displayGLOnly();
 			Thread.sleep(10);
