@@ -19,6 +19,7 @@ public class BaseScene {
 	}
 	
 	public World world = new World();
+	public HUD hud = new HUD();
 
 	public static String addTexture(String name, int width, int height) {
 		String shortName = name.contains(".") ? 

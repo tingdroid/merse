@@ -12,7 +12,10 @@ import com.ting.scene.Scene;
 public class MainOGL {
 
 	private FrameBuffer buffer;
+	private GLPointer pointer;
 	private Scene scene;
+	
+	private boolean fullScreen = false;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) System.out.println(args[0]);
@@ -22,18 +25,39 @@ public class MainOGL {
 	public MainOGL() throws Exception {
 		scene = new Scene();
 	}
+	
+	private void init()  throws Exception {
+		if (buffer != null)
+			dispose();
 
-	private void loop() throws Exception {
-		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
+		int frameWidth = fullScreen ? Display.getDesktopDisplayMode().getWidth() : 800;
+		int frameHeight = fullScreen ?  Display.getDesktopDisplayMode().getHeight() : 600;
+		
+		buffer = new FrameBuffer(frameWidth, frameHeight, FrameBuffer.SAMPLINGMODE_NORMAL);
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		buffer.enableRenderer(IRenderer.RENDERER_OPENGL);
 
-		// Display.setFullscreen(true);
+		Display.setFullscreen(fullScreen);
 		Display.setTitle("Snork");
-		
-		GLPointer pointer = new GLPointer(buffer);
 
+		pointer = new GLPointer(buffer);
+	}
+
+	private void dispose() {
+		buffer.disableRenderer(IRenderer.RENDERER_OPENGL);
+		buffer.dispose();
+		buffer = null;
+	}
+
+	private void loop() throws Exception {
+		init();
+		
 		while (!Display.isCloseRequested()) {
+			if (pointer.isPressed(1)) {
+				fullScreen = !fullScreen;
+				init();
+				continue;
+			}
 			if (pointer.isDown(0)) {
 				pointer.hide();
 				scene.move(pointer.getDX(), pointer.getDY());
@@ -42,15 +66,23 @@ public class MainOGL {
 				scene.loop();
 				// scene.move(-1, 0);  // animate
 			}
+			float dz = pointer.getDZ();
+			if (dz != 0) {
+				scene.zoom(dz);
+			}
+			scene.hud.setText(0, "Position: %d %d", pointer.getX(), pointer.getY());
+			scene.hud.setText(1, "Scale: %d", (int)dz);
+					
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);
 			buffer.update();
+			scene.hud.draw(buffer);
+			scene.hud.draw(buffer, "Snork", buffer.getWidth() - 50, 28);
 			buffer.displayGLOnly();
 			Thread.sleep(10);
 		}
-		buffer.disableRenderer(IRenderer.RENDERER_OPENGL);
-		buffer.dispose();
+		dispose();
 		System.exit(0);
 	}
 }

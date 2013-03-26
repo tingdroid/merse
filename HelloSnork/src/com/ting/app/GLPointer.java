@@ -11,6 +11,7 @@ import com.threed.jpct.FrameBuffer;
 public class GLPointer {
 
 	private boolean hidden = false;
+	private boolean pressed[] = new boolean[]{false, false, false};
 
 	private int height = 0;
 
@@ -44,15 +45,25 @@ public class GLPointer {
 		}
 	}
 
+	public boolean isPressed(int button) {
+		if (Mouse.isButtonDown(button)) {
+			if (pressed[button]) return false;
+			pressed[button] = true;
+			return true;
+		}
+		pressed[button] = false;
+		return false;
+	}
+
 	public boolean isDown(int button) {
 		return Mouse.isButtonDown(button);
 	}
 
-	public int getMouseX() {
+	public int getX() {
 		return Mouse.getX();
 	}
 
-	public int getMouseY() {
+	public int getY() {
 		return height - Mouse.getY();
 	}
 
@@ -67,6 +78,14 @@ public class GLPointer {
 	public int getDY() {
 		if (Mouse.isGrabbed()) {
 			return -Mouse.getDY();
+		} else {
+			return 0;
+		}
+	}
+
+	public float getDZ() {
+		if (Mouse.hasWheel()) {
+			return Mouse.getDWheel() / -120f;
 		} else {
 			return 0;
 		}

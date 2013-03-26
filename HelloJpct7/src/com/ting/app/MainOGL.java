@@ -24,11 +24,14 @@ public class MainOGL {
 	}
 
 	private void loop() throws Exception {
-		buffer = new FrameBuffer(800, 600, FrameBuffer.SAMPLINGMODE_NORMAL);
+		int frameWidth = Display.getDesktopDisplayMode().getWidth(); // 800
+		int frameHeight = Display.getDesktopDisplayMode().getHeight(); // 600
+		
+		buffer = new FrameBuffer(frameWidth, frameHeight, FrameBuffer.SAMPLINGMODE_NORMAL);
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
 		buffer.enableRenderer(IRenderer.RENDERER_OPENGL);
 
-		// Display.setFullscreen(true);
+		Display.setFullscreen(true);
 		Display.setTitle("Hello, world!");
 		
 		GLPointer pointer = new GLPointer(buffer);
