@@ -55,15 +55,21 @@ public class GLFont {
 	/** 
 	 * same as getGLFont(font, ENGLISH) 
 	 * @see #getGLFont(Font, String) 
-	 * */
+	 */
 	public static GLFont getGLFont(Font font) {
 		return getGLFont(font, ENGLISH);
 	}
 
+	/** using platform-neutral Font parameters 
+	 * @author olegyk 
+	 */
 	public static GLFont getGLFont(String face, int style, int size) {
 		return getGLFont(new java.awt.Font(face, style, size));
 	}
 
+	/** using platform-neutral Font parameters and default face 
+	 * @author olegyk 
+	 */
 	public static GLFont getGLFont(int style, int size) {
 		return getGLFont("Dialog", style, size);
 	}
@@ -197,6 +203,7 @@ public class GLFont {
 	 *            text color
 	 * @param y
 	 *            baseline
+	 * @return    next x offset. Useful for chaining calls.
 	 */
 	public int blitString(FrameBuffer buffer, String s, int x, int y, int transparency, Color color) {
 		y -= baseline;

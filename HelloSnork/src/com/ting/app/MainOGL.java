@@ -16,6 +16,8 @@ public class MainOGL {
 	private Scene scene;
 	
 	private boolean fullScreen = false;
+	private int windowWidth = 800;
+	private int windowHeight = 600;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) System.out.println(args[0]);
@@ -29,9 +31,9 @@ public class MainOGL {
 	private void init()  throws Exception {
 		if (buffer != null)
 			dispose();
-
-		int frameWidth = fullScreen ? Display.getDesktopDisplayMode().getWidth() : 800;
-		int frameHeight = fullScreen ?  Display.getDesktopDisplayMode().getHeight() : 600;
+		
+		int frameWidth = fullScreen ? Display.getDesktopDisplayMode().getWidth() : windowWidth;
+		int frameHeight = fullScreen ?  Display.getDesktopDisplayMode().getHeight() : windowHeight;
 		
 		buffer = new FrameBuffer(frameWidth, frameHeight, FrameBuffer.SAMPLINGMODE_NORMAL);
 		buffer.disableRenderer(IRenderer.RENDERER_SOFTWARE);
@@ -71,14 +73,16 @@ public class MainOGL {
 				scene.zoom(dz);
 			}
 			scene.hud.setText(0, "Position: %d %d", pointer.getX(), pointer.getY());
-			scene.hud.setText(1, "Scale: %d", (int)dz);
+//			scene.hud.setText(1, "Scale: %d", (int)dz);
 					
 			buffer.clear(scene.background);
 			scene.world.renderScene(buffer);
 			scene.world.draw(buffer);
 			buffer.update();
+
 			scene.hud.draw(buffer);
 			scene.hud.draw(buffer, "Snork", buffer.getWidth() - 50, 28);
+			
 			buffer.displayGLOnly();
 			Thread.sleep(10);
 		}
